@@ -1,0 +1,11 @@
+Model Information:
+* title:	Streetlights
+* source:	https://sketchfab.com/3d-models/streetlights-322ead256c5c40febdb0af6e45a6938a
+* author:	ROY (https://sketchfab.com/roy.gearloft.in)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Streetlights" (https://sketchfab.com/3d-models/streetlights-322ead256c5c40febdb0af6e45a6938a) by ROY (https://sketchfab.com/roy.gearloft.in) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
