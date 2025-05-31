@@ -15,8 +15,22 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
-camera.position.set(10, 5, 10);
-camera.rotation.set();
+camera.position.set(
+    -1.9374464609765463,
+    3.591674419326699,
+    6.350020526777001
+);
+
+camera.rotation.set(
+    -0.357921026765742,
+    -1.0318148756499796,
+    -0.31061477622434874
+);
+
+
+document.addEventListener('keypress', () => {
+    console.log(camera.position, camera.rotation);
+})
 
 // === Renderer ===
 const renderer = new THREE.WebGLRenderer();
@@ -36,7 +50,7 @@ const sound = new THREE.Audio(listener);
 const audioLoader = new THREE.AudioLoader();
 
 audioLoader.load(
-    'music/Dirtmouth.mp3', (buffer) => {
+    '/music/Dirtmouth.mp3', (buffer) => {
         sound.setBuffer(buffer);
         sound.setLoop(true);
         sound.setVolume(0.25);
@@ -65,7 +79,7 @@ const gltfLoader = new GLTFLoader();
 
 // Bench model
 gltfLoader.load(
-    'models/bench/scene.gltf',
+    '/models/bench/scene.gltf',
     (gltf) => {
         const model = gltf.scene;
         model.scale.set(2, 2, 2); // Try larger if necessary
@@ -75,7 +89,7 @@ gltfLoader.load(
 
 // === Light Model ===
 gltfLoader.load(
-    'models/streetlight/scene.gltf',
+    '/models/streetlight/scene.gltf',
     (gltf) => {
         const model = gltf.scene;
         model.rotation.y = 10;
