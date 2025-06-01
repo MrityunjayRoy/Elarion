@@ -1,9 +1,7 @@
 // main.js
 import * as THREE from 'three';
-import { Refractor } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { buffer, color } from 'three/tsl';
 
 // === Scene ===
 const scene = new THREE.Scene();
@@ -27,15 +25,10 @@ camera.rotation.set(
     -0.31061477622434874
 );
 
-
-document.addEventListener('keypress', () => {
-    console.log(camera.position, camera.rotation);
-})
-
 // === Renderer ===
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(1);
 document.body.appendChild(renderer.domElement);
 
 // === Controls ===
@@ -110,12 +103,22 @@ const light = new THREE.AmbientLight();
 light.position.set(10, 5, 0);
 scene.add(light);
 
-const blueLight = new THREE.PointLight(0x66ccff, 1, 60); // color, intensity, distance
-blueLight.position.set(0, 5, 0); // Same spot as your streetlight
-scene.add(blueLight);
+const spotlight = new THREE.SpotLight(
+    0xdae6eb,   // Soft blueish light color
+    6,          // Intensity (a bit brighter)
+    15,         // Distance
+    Math.PI / 4, // Spotlight cone (30°)
+    0.5,        // Penumbra (soft edges)
+    1           // Decay (how quickly it fades)
+);
+
+spotlight.position.set(0, 5, 0); // Adjust this to be directly above bench
+spotlight.target.position.set(0, 0, 0); // Aim it at the center of the bench
+scene.add(spotlight);
+scene.add(spotlight.target); // Important: must add the target to scene!
 
 // === Fog ===
-scene.fog = new THREE.Fog(0x0d0d1a, 5, 25);
+scene.fog = new THREE.Fog(0xdae6eb, 10, 60);
 
 // === Particles ===
 const particleCount = 100;
@@ -155,7 +158,7 @@ function animate() {
     const pos = particles.geometry.attributes.position;
 
     for (let i = 0; i < pos.count; i++) {
-        pos.array[i * 3 + 1] -= 0.05; // move down
+        pos.array[i * 3 + 1] -= 0.09; // move down
         if (pos.array[i * 3 + 1] < 0) {
             pos.array[i * 3 + 1] = 10 + Math.random() * 5; // respawn higher
         }
